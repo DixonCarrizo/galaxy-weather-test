@@ -1,0 +1,33 @@
+{
+  "extends": "airbnb-base",
+  "rules": {
+    "curly": ["error", "all"],
+    "func-names": "off",
+    "newline-before-return": "error",
+    "no-console": ["error", { "allow": ["warn", "error"] }],
+    "no-magic-numbers": ["error", {
+      "ignore": [-1, 0, 1]
+    }],
+    "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
+    "no-plusplus": ["error", {
+      "allowForLoopAfterthoughts": true
+    }],
+    "no-underscore-dangle": "off",
+    "object-curly-newline": ["error", {
+      "multiline": true,
+      "minProperties": 4
+    }],
+    "max-classes-per-file": ["error", 2],
+    "max-len": ["error", { "code": 120 }],
+    "quotes": ["error", "single"],
+    "semi": ["error", "always"],
+    "no-multiple-empty-lines": [
+      "error",
+      {
+        "max": 1,
+        "maxEOF": 1,
+        "maxBOF": 0
+      }
+    ]
+  }
+}

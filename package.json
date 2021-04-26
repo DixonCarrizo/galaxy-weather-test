@@ -1,0 +1,25 @@
+{
+  "name": "galaxy-weather-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "planets.js",
+  "scripts": {
+    "format": "eslint . --fix",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DixonCarrizo/galaxy-weather-test.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DixonCarrizo/galaxy-weather-test/issues"
+  },
+  "homepage": "https://github.com/DixonCarrizo/galaxy-weather-test#readme",
+  "dependencies": {
+    "eslint": "^7.25.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1"
+  }
+}

@@ -1,3 +1,7 @@
+const planets = require('./planets');
+
+const degreesOfCircumference = 360;
+
 /**
  * Calculate the new angle of the planet.
  *
@@ -7,13 +11,13 @@
  * @returns {number} Planet Angle
  */
 const calculateAngle = (days, speed, rotationType) => {
-  let angle = (speed * days) % 360
+  let angle = (speed * days) % degreesOfCircumference;
   if (rotationType === 'COUNTERCLOCKWISE') {
-    angle = 360 - angle
+    angle = degreesOfCircumference - angle;
   }
 
-  return angle
-}
+  return angle;
+};
 
 /**
  * Converts a polar coordinate to Cartesian from a radius and an angle.
@@ -26,11 +30,8 @@ const polarToCartesianCoordinates = (radius, angle) => {
   const x = radius * Math.cos(angle);
   const y = radius * Math.sin(angle);
 
-  return {
-    x,
-    y,
-  }
-}
+  return { x, y };
+};
 
 /**
  * This function calculates the direction that exists from planet A to planet B.
@@ -42,15 +43,11 @@ const polarToCartesianCoordinates = (radius, angle) => {
 const getVector = (pointA, pointB) => {
   const { x: xa, y: ya } = pointA;
   const { x: xb, y: yb } = pointB;
-  AB = B - A
   const x = xb - xa;
   const y = yb - ya;
 
-  return {
-    x,
-    y,
-  }
-}
+  return { x, y };
+};
 
 /**
  * Validates if two vector are lineals by calculating if the coordinates are proportional.
@@ -66,7 +63,7 @@ const areLineal = (vectorA, vectorB) => {
   const propotionalY = ya / yb;
 
   return propotionalX === propotionalY;
-}
+};
 
 // Usar vectores AB y AC
 /**
@@ -83,11 +80,26 @@ const pointInTriangle = (vectorA, vectorB, vertex, point) => {
   const { x: ex, y: ey } = vectorB;
   const { x: vx, y: vy } = vertex;
   const { x: px, y: py } = point;
+
   const w1 = (ex * (vy - py) + ey * (px - vx)) / (dx * ey - dy * ex);
   const w2 = ey ? (py - vy - w1 * dy) / ey : 0;
 
-  return (w1 >= 0) && (w2 >= 0) && ((w1 + w2) <= 1)
-}
+  return (w1 >= 0) && (w2 >= 0) && ((w1 + w2) <= 1);
+};
+
+const calculatePlanetPosition = (days) => {
+  const planetsWithCoordinates = planets.map((planet) => {
+    const angle = calculateAngle(days, planet.speed, planet.rotation);
+    const coordinates = polarToCartesianCoordinates(planet.distance, angle);
+
+    return {
+      ...planet,
+      ...coordinates,
+    };
+  });
+
+  return planetsWithCoordinates;
+};
 
 const getWeather = (day) => {
   // Calculate Planets positions
@@ -95,5 +107,3 @@ const getWeather = (day) => {
   // If planets not align Calculate if sun is inside the trigangle
   // If sun inside the triangle save the perimeter
 };
-
-
